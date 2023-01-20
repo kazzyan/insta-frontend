@@ -1,38 +1,20 @@
-import { useState } from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
-import { isLoggedInVar } from "../apollo";
+import { darkModeVar, isLoggedInVar } from "../apollo";
 
 const Container = styled.div`
-    background-color: gray;
+    background-color: ${(props) => props.theme.bgColor};
 `;
 
-const Title = styled.h1`
-    color: ${(props) => (props.green ? "green" : "beige")};
-    ${(props) => (
-        props.green 
-        ? css`
-            font-weight: bold;
-        `
-        : css`
-            text-decoration: underline;
-        `
-    )};
-`;
-
-const Toggle = styled.button`
-    color: green;
-`;
+const Title = styled.h1``;
 
 function Login() {
-    const [green, setGreen] = useState(false);
-    const toggleGreen = () => setGreen((current) => !current);
-    
+
     return (
         <Container>
-            <Title green={green}>Login</Title>
-            <Toggle onClick={toggleGreen}>toggle</Toggle>
-
+            <Title>Login</Title>
+            <button onClick={() => darkModeVar(true)}>To dark</button>
+            <button onClick={() => darkModeVar(false)}>To light</button>
             <button onClick={() => isLoggedInVar(true)}>
                 Log in now!
             </button>
